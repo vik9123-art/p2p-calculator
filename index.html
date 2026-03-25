@@ -93,6 +93,25 @@ ${status}
 `;
 }
 </script>
+let isPro = false; // переключаешь вручную после оплаты
 
+function saveTrade(){
+if(!isPro){
+alert("Доступно только в PRO");
+return;
+}
+
+let trade = {
+amount: amount.value,
+buy: buy.value,
+sell: sell.value
+};
+
+let trades = JSON.parse(localStorage.getItem("trades") || "[]");
+trades.push(trade);
+localStorage.setItem("trades", JSON.stringify(trades));
+
+alert("Сделка сохранена");
+}
 </body>
 </html>
