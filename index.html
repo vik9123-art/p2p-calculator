@@ -69,7 +69,23 @@ let amount = parseFloat(document.getElementById('amount').value);
 let buy = parseFloat(document.getElementById('buy').value);
 let sell = parseFloat(document.getElementById('sell').value);
 let fee = parseFloat(document.getElementById('fee').value) / 100;
+let isPro = false; // переключаешь вручную после оплаты
 
+function saveTrade(){
+if(!isPro){
+alert("Доступно только в PRO");
+return;
+}
+
+let trade = {
+amount: amount.value,
+buy: buy.value,
+sell: sell.value
+};
+
+let trades = JSON.parse(localStorage.getItem("trades") || "[]");
+trades.push(trade);
+localStorage.setItem("trades", JSON.stringify(trades));
 if(!amount || !buy || !sell){
 alert("Заполни все поля");
 return;
